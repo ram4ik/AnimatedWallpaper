@@ -9,8 +9,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var shiftColor = false
+    
     var body: some View {
-        Text("Hello, World!")
+        ZStack {
+            Image("wallpaper")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .hueRotation(.degrees(shiftColor ? 45 : 1600))
+                .animation(Animation.easeInOut(duration: 5).repeatForever(autoreverses: true))
+                .onAppear() {
+                    self.shiftColor.toggle()
+            }.edgesIgnoringSafeArea(.all)
+            
+            Text("Animated Wallpaper")
+                .font(.largeTitle)
+        }
     }
 }
 
